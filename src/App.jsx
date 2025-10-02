@@ -1,15 +1,12 @@
-import { useState } from 'react'
 import Navbar from './components/Navbar'
 import './App.css'
 import Home from './pages/Home'
 import Favorites from './pages/Favorites'
 import { Box } from '@mui/material'
 import { FavoritesProvider } from './context/FavoritesContext'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <FavoritesProvider>
       <Router>
@@ -18,6 +15,8 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/favorites" element={<Favorites />} />
+            {/* Fallback route to Home */}
+            <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </Box>
       </Router>
@@ -26,4 +25,5 @@ function App() {
 }
 
 export default App
+
 
